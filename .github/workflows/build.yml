@@ -121,22 +121,26 @@ jobs:
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/ublue-os/startingpoint/main/README.md
             io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/120078124?s=200&v=4
 
+      - name:
+        run: |
+          buildah build -t ghcr.io/{{ github.actor }}/{{ env.IMAGE_NAME }}:{{ FEDORA_MAJOR_VERSION }}
+
       # Build image using Buildah action
-      - name: Build Image
-        id: build_image
-        uses: redhat-actions/buildah-build@v2
-        with:
-          containerfiles: |
-            ./Containerfile
-          image: ${{ env.IMAGE_NAME }}
-          tags: |
-            ${{ steps.generate-tags.outputs.alias_tags }}
-          build-args: |
-            FEDORA_MAJOR_VERSION=${{ env.FEDORA_MAJOR_VERSION }}
-            BASE_IMAGE_URL=${{ env.BASE_IMAGE_URL }}
-            RECIPE=${{ matrix.recipe }}
-          labels: ${{ steps.meta.outputs.labels }}
-          oci: true
+      # - name: Build Image
+      #   id: build_image
+      #   uses: redhat-actions/buildah-build@v2
+      #   with:
+      #     containerfiles: |
+      #       ./Containerfile
+      #     image: ${{ env.IMAGE_NAME }}
+      #     tags: |
+      #       ${{ steps.generate-tags.outputs.alias_tags }}
+      #     build-args: |
+      #       FEDORA_MAJOR_VERSION=${{ env.FEDORA_MAJOR_VERSION }}
+      #       BASE_IMAGE_URL=${{ env.BASE_IMAGE_URL }}
+      #       RECIPE=${{ matrix.recipe }}
+      #     labels: ${{ steps.meta.outputs.labels }}
+      #     oci: true
 
       # Workaround bug where capital letters in your GitHub username make it impossible to push to GHCR.
       # https://github.com/macbre/push-to-ghcr/issues/12
