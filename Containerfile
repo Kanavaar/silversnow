@@ -1,4 +1,8 @@
 # This is the Containerfile for your custom image. 
+LABEL org.opencontainers.image.source=https://github.com/kanavaar/silversnow
+LABEL org.opencontainers.image.description="Fedora Custom Silverblue Image"
+LABEL org.opencontainers.image.licenses=Apache-2.0
+
 
 # It takes in the recipe, version, and base image as arguments,
 # all of which are provided by build.yml when doing builds
