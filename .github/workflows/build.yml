@@ -131,10 +131,6 @@ jobs:
           image: ${{ env.IMAGE_NAME }}
           tags: |
             ${{ steps.generate-tags.outputs.alias_tags }}
-          build-args: |
-            FEDORA_MAJOR_VERSION=${{ env.FEDORA_MAJOR_VERSION }}
-            BASE_IMAGE_URL=${{ env.BASE_IMAGE_URL }}
-            RECIPE=${{ matrix.recipe }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: false
 
